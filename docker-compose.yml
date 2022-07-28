@@ -6,8 +6,9 @@ services:
     image: itzg/minecraft-server:java17
     environment:
       TYPE: "PAPER"
-      EULA: "TRUE"
       VERSION: "1.19"
+      MEMORY: "6G"
+      EULA: "TRUE"
     volumes:
       - ./data:/data:Z
     ports:
