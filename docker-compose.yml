@@ -11,6 +11,7 @@ services:
       VERSION: "1.19"
       MEMORY: "6G"
       EULA: "TRUE"
+      UID: "1001"
     volumes:
       - ./data:/data:Z
     ports:
