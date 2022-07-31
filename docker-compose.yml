@@ -10,8 +10,9 @@ services:
       TYPE: "PAPER"
       VERSION: "1.19"
       MEMORY: "6G"
-      EULA: "TRUE"
+      MOTD: "Alex's Server"
       UID: "1001"
+      EULA: "TRUE"
     volumes:
       - ./data:/data:Z
     ports:
