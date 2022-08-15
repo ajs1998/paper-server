@@ -17,4 +17,4 @@ services:
       - ./data:/data:Z
     ports:
       - 25565:25565
-    restart: unless-stopped
+    restart: on-failure
