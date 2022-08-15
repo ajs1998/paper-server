@@ -15,6 +15,20 @@ services:
       EULA: "TRUE"
     volumes:
       - ./data:/data:Z
+      - ./dynmap/:/var/opt/dynmap/web/:Z
     ports:
       - 25565:25565
     restart: on-failure
+
+  dynmap:
+    image: nginx:latest
+    tty: true
+    stdin_open: true
+    ports:
+      - 80:80
+      - 443:443
+    restart: on-failure
+    volumes:
+      - ./dynmap/:/var/opt/dynmap/web/:ro
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - /etc/ssl/alexjs.dev/:/etc/nginx/ssl/:ro
