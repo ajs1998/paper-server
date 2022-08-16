@@ -1,0 +1,7 @@
+FROM nginx:1.21-alpine
+
+ENV NGINX_ENTRYPOINT_QUIET_LOGS=1 NGINX_PORT=443
+
+EXPOSE 443
+
+COPY nginx/ /etc/nginx/conf.d/
