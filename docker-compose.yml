@@ -4,7 +4,7 @@ version: "3"
 services:
   mc:
     image: itzg/minecraft-server:java17
-    container_name: paper
+    container_name: mc
     tty: true
     stdin_open: true
     environment:
@@ -12,28 +12,26 @@ services:
       VERSION: "1.19"
       MEMORY: "6G"
       MOTD: "Alex's Server"
-      UID: "1001"
       EULA: "TRUE"
     volumes:
       - ./data:/data:Z
-      - ./dynmap/:/usr/share/nginx/html/:Z
+      - ./dynmap/:/usr/share/nginx/html/:z
     ports:
       - 25565:25565
     restart: on-failure
 
   dynmap:
     image: nginx:1.21-alpine
-    container_name: dynmap
+    container_name: map
     tty: true
     stdin_open: true
     environment:
       NGINX_ENTRYPOINT_QUIET_LOGS: 1
       NGINX_PORT: 443
-      UID: "1001"
     ports:
       - 443:443
     restart: on-failure
     volumes:
-      - ./dynmap/:/usr/share/nginx/html/:Z
-      - ./nginx/:/etc/nginx/conf.d/:Z
-      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/:Z
+      - ./dynmap/:/usr/share/nginx/html/:z
+      - ./nginx/:/etc/nginx/conf.d/:ro
+      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/:ro
