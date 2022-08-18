@@ -21,7 +21,7 @@ services:
     restart: on-failure
 
   dynmap:
-    image: nginx:1.21-alpine
+    image: nginx:1.22-alpine
     container_name: map
     tty: true
     stdin_open: true
