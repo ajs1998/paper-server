@@ -28,10 +28,11 @@ services:
     environment:
       NGINX_ENTRYPOINT_QUIET_LOGS: 1
       NGINX_PORT: 443
+      UID: "1000"
     ports:
       - 443:443
     restart: on-failure
     volumes:
       - ./dynmap/:/usr/share/nginx/html/:z
-      - ./nginx/:/etc/nginx/conf.d/:ro
-      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/:ro
+      - ./nginx/:/etc/nginx/conf.d/:Z
+      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/:Z
