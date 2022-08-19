@@ -459,7 +459,7 @@ msg:
 # URL for client configuration (only need to be tailored for proxies or other non-standard configurations)
 url:
     # configuration URL
-    configuration: "standalone/MySQL_config.php"
+    configuration: "standalone/MySQL_configuration.php"
     # update URL
     update: "standalone/MySQL_update.php?world={world}&ts={timestamp}"
     # sendmessage URL

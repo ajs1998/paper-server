@@ -14,8 +14,8 @@ services:
       MOTD: "Alex's Server"
       EULA: "TRUE"
     volumes:
-      - ./data:/data:Z
-      - ./nginx/html/:/usr/share/nginx/html:z
+      - ./data:/data
+      - ./nginx/html/:/usr/share/nginx/html
     ports:
       - 25565:25565
     depends_on:
@@ -30,11 +30,11 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: "password"
     volumes:
-      - ./db/:/var/lib/mysql/:Z
+      - ./db/:/var/lib/mysql/
     restart: on-failure
 
-  dynmap:
-    image: nginx:1.22-alpine
+  map:
+    image: nginx:1.23
     container_name: map
     tty: true
     stdin_open: true
@@ -48,9 +48,9 @@ services:
       - db
     restart: on-failure
     volumes:
-      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/:Z
-      - ./nginx/conf.d/:/etc/nginx/conf.d/:Z
-      - ./nginx/html/:/usr/share/nginx/html:z
+      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/html/:/usr/share/nginx/html/
 
 volumes:
   db:
