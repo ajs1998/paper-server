@@ -45,7 +45,7 @@ services:
     ports:
       - 443:443
     depends_on:
-      - mc
+      - db
     restart: on-failure
     volumes:
       - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/:Z
