@@ -15,7 +15,6 @@ services:
       EULA: "TRUE"
     volumes:
       - ./data:/data
-      - ./nginx/html/:/usr/share/nginx/html
     ports:
       - 25565:25565
     depends_on:
@@ -34,7 +33,7 @@ services:
     restart: on-failure
 
   map:
-    image: nginx:1.23
+    image: nginx:1.23-alpine
     container_name: map
     tty: true
     stdin_open: true
@@ -44,13 +43,12 @@ services:
       UID: "1000"
     ports:
       - 443:443
-    depends_on:
-      - db
+    # depends_on:
+      # - db
     restart: on-failure
     volumes:
       - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
-      - ./nginx/html/:/usr/share/nginx/html/
 
 volumes:
   db:
