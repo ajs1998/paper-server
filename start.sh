@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-docker-compose up -d
+docker-compose up -d --remove-orphans
