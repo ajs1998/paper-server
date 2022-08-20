@@ -4,6 +4,7 @@ version: "3"
 services:
   mc:
     image: itzg/minecraft-server:java17
+    container_name: mc
     tty: true
     stdin_open: true
     environment:
@@ -11,10 +12,43 @@ services:
       VERSION: "1.19"
       MEMORY: "6G"
       MOTD: "Alex's Server"
-      UID: "1001"
       EULA: "TRUE"
     volumes:
-      - ./data:/data:Z
+      - ./data:/data
     ports:
       - 25565:25565
+    depends_on:
+      - db
     restart: on-failure
+
+  db:
+    image: mariadb:10
+    container_name: db
+    tty: true
+    stdin_open: true
+    environment:
+      MARIADB_ROOT_PASSWORD: "password"
+    volumes:
+      - db/:/var/lib/mysql/
+    restart: on-failure
+
+  map:
+    image: nginx:1.23-alpine
+    container_name: map
+    tty: true
+    stdin_open: true
+    environment:
+      NGINX_ENTRYPOINT_QUIET_LOGS: 1
+      NGINX_PORT: 443
+      UID: "1000"
+    ports:
+      - 443:443
+    depends-on:
+      - mc
+    restart: on-failure
+    volumes:
+      - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+
+volumes:
+  db:
