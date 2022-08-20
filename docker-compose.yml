@@ -29,7 +29,7 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: "password"
     volumes:
-      - ./db/:/var/lib/mysql/
+      - db/:/var/lib/mysql/
     restart: on-failure
 
   map:
@@ -43,8 +43,8 @@ services:
       UID: "1000"
     ports:
       - 443:443
-    # depends_on:
-      # - db
+    depends-on:
+      - mc
     restart: on-failure
     volumes:
       - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/
