@@ -32,9 +32,9 @@ services:
       - db/:/var/lib/mysql/
     restart: on-failure
 
-  map:
+  site:
     image: nginx:1.23-alpine
-    container_name: map
+    container_name: site
     tty: true
     stdin_open: true
     environment:
@@ -49,6 +49,15 @@ services:
     volumes:
       - /etc/ssl/alexjs.dev/:/etc/ssl/alexjs.dev/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+
+  # files:
+    # container_name: files
+    # image: machines/filestash
+    # restart: on-failure
+    # environment:
+    # - APPLICATION_URL=files.alexjs.dev
+    # ports:
+    # - 8334:8334
 
 volumes:
   db:
