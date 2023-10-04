@@ -9,7 +9,7 @@ services:
     stdin_open: true
     environment:
       TYPE: "PAPER"
-      VERSION: "1.20"
+      VERSION: "1.20.1"
       MEMORY: "6G"
       MOTD: "Alex's Server"
       EULA: "TRUE"
@@ -17,9 +17,12 @@ services:
       - ./data:/data
     ports:
       - 25565:25565
+      - 8100:8100
     depends_on:
       - db
     restart: on-failure
+    networks:
+      - alexjs_network
 
   db:
     image: mariadb:10
@@ -31,6 +34,10 @@ services:
     volumes:
       - db:/var/lib/mysql/
     restart: on-failure
+
+networks:
+  alexjs_network:
+    external: true
 
 volumes:
   db: {}
